@@ -23,11 +23,12 @@ $ ->
 
   Comment = React.createClass
     render: ->
+      rawMarkup = marked(this.props.children.toString(), {sanitize: true})
       `<div className="comment">
          <h2 className="commentAuthor">
            {this.props.author}
          </h2>
-         {this.props.children}
+         <span dangerouslySetInnerHTML={{__html: rawMarkup}} /> 
        </div>`
 
   React.render `<CommentBox />`, document.getElementById('content')
