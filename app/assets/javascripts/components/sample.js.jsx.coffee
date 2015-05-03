@@ -25,12 +25,11 @@ $ ->
 
   Comment = React.createClass
     render: ->
-      rawMarkup = marked(this.props.children.toString(), {sanitize: true})
       `<div className="comment">
          <h2 className="commentAuthor">
            {this.props.author}
          </h2>
-         <span dangerouslySetInnerHTML={{__html: rawMarkup}} /> 
+         {this.props.children}
        </div>`
 
   # This json data is assumed come from server.
