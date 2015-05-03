@@ -3,17 +3,19 @@ $ ->
     render: ->
       `<div className="commentBox">
         <h1>Comments</h1>
-        <CommentList />
-          <Comment author="igaiga">This is a comment</Comment>
-          <Comment author="matz">This is anothoer comment</Comment>
+        <CommentList data={this.props.data} />
         <CommentForm />
        </div>`
 
   CommentList = React.createClass
     render: ->
+      commentNodes = this.props.data.map (comment) ->
+        `<Comment author={comment.author}>
+          {comment.text}
+         </Comment>`
       `<div className="commentList">
-         ***CommentList***
-      </div>`
+         {commentNodes}
+       </div>`
 
   CommentForm = React.createClass
     render: ->
@@ -31,4 +33,10 @@ $ ->
          <span dangerouslySetInnerHTML={{__html: rawMarkup}} /> 
        </div>`
 
-  React.render `<CommentBox />`, document.getElementById('content')
+  # This json data is assumed come from server.
+  data = [
+    {author: "igaiga", text: "This is one comment"},
+    {author: "matz", text: "This is *another* comment"}
+  ]
+
+  React.render `<CommentBox data = {data}/>`, document.getElementById('content')
