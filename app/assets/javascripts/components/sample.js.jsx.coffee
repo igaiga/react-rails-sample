@@ -1,4 +1,10 @@
 $ ->
+  # This json data is assumed come from server.
+  data = [
+    {author: "igaiga", text: "This is one comment"},
+    {author: "matz", text: "This is *another* comment"}
+  ]
+
   CommentBox = React.createClass
     render: ->
       `<div className="commentBox">
@@ -31,11 +37,5 @@ $ ->
          </h2>
          {this.props.children}
        </div>`
-
-  # This json data is assumed come from server.
-  data = [
-    {author: "igaiga", text: "This is one comment"},
-    {author: "matz", text: "This is *another* comment"}
-  ]
 
   React.render `<CommentBox data = {data}/>`, document.getElementById('content')
