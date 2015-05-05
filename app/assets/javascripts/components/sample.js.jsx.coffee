@@ -1,10 +1,16 @@
 $ ->
   # This json data is assumed come from server.
-  data = [
-    {author: "igaiga", text: "This is one comment"},
-    {author: "matz", text: "This is *another* comment"}
-  ]
-  # alert "#{Routes.dashboard_comments_path}"
+  # data = [
+  #   {author: "igaiga", text: "This is one comment"},
+  #   {author: "matz", text: "This is *another* comment"}
+  # ]
+  data = []
+  # I'd like to replace jquery to superagent or something.
+  $.get("#{Routes.dashboard_comments_path(format: 'json')}", )
+  .done (res) ->
+    data = res
+    React.render `<CommentBox data = {data}/>`, document.getElementById('content')
+
   CommentBox = React.createClass
     render: ->
       `<div className="commentBox">
@@ -37,5 +43,3 @@ $ ->
          </h2>
          {this.props.children}
        </div>`
-
-  React.render `<CommentBox data = {data}/>`, document.getElementById('content')
