@@ -3,18 +3,15 @@ $ ->
     getInitialState: ->
       {data: []}
     componentDidMount: ->
+      # I'd like to replace jquery to supueragent or somethings.
       $.ajax
-        url: this.props.url
+        url: @props.url
         dataType: 'json'
         cache: false
-        success: ((data) ->
-          this.setState data: data
-          return
-        ).bind(this)
-        error: ((xhr, status, err) ->
-          console.error this.props.url, status, err.toString()
-          return
-        ).bind(this)
+        success: (data) =>
+          @setState data: data
+        error: (xhr, status, err) =>
+          console.error @props.url, status, err.toString()
     render: ->
       `<div className="commentBox">
         <h1>Comments</h1>
