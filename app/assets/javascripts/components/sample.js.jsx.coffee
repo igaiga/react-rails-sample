@@ -1,8 +1,6 @@
 $ ->
   CommentBox = React.createClass
-    getInitialState: ->
-      {data: []}
-    componentDidMount: ->
+    loadCommentsFromServer: ->
       # I'd like to replace jquery to supueragent or somethings.
       $.ajax
         url: @props.url
@@ -12,6 +10,11 @@ $ ->
           @setState data: data
         error: (xhr, status, err) =>
           console.error @props.url, status, err.toString()
+    getInitialState: ->
+      {data: []}
+    componentDidMount: ->
+      @loadCommentsFromServer()
+      setInterval(@loadCommentsFromServer, @props.pollInterval)
     render: ->
       `<div className="commentBox">
         <h1>Comments</h1>
@@ -46,4 +49,4 @@ $ ->
 
   # jsx に書くために一度js変数に代入
   target_url = "#{Routes.dashboard_comments_path(format: 'json')}"
-  React.render `<CommentBox url = {target_url}/>`, document.getElementById('content')
+  React.render `<CommentBox url = {target_url} pollInterval={2000} />`, document.getElementById('content')
