@@ -4,7 +4,7 @@ $ ->
     {author: "igaiga", text: "This is one comment"},
     {author: "matz", text: "This is *another* comment"}
   ]
-
+  # alert "#{Routes.dashboard_comments_path}"
   CommentBox = React.createClass
     render: ->
       `<div className="commentBox">
