@@ -14,6 +14,7 @@ $ ->
       {data: []}
     componentDidMount: ->
       @loadCommentsFromServer()
+      # polling
       setInterval(@loadCommentsFromServer, @props.pollInterval)
     render: ->
       `<div className="commentBox">
